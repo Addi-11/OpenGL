@@ -1,0 +1,5 @@
+#ignore the ouput files
+*.out
+
+#ignore random files
+random*.cpp
