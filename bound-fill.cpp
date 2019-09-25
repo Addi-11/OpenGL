@@ -41,10 +41,6 @@ void bfill(GLint x, GLint y, Color boundColor, Color newColor){
     //to get the current pixel color
     Color color = getPixelColor(x,y);
 
-    // std::cout<< color.r << " "<< boundColor.r << std::endl;
-    // std::cout<< color.g << " "<< boundColor.g << std::endl;
-    // std::cout<< color.b << " "<< boundColor.b << std::endl;
-
     //stop filling as soon as getpixel color == boundary color
     if(color.r != boundColor.r && color.g != boundColor.g && color.b != boundColor.b){
         setPixelColor(x, y, newColor);
