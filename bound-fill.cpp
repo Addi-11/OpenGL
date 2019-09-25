@@ -1,5 +1,6 @@
 #include <math.h>
 #include <GL/glut.h>
+#include<iostream>
 
 struct Point {
 	GLint x;
@@ -35,38 +36,32 @@ void setPixelColor(GLint x, GLint y, Color color) {
 	glFlush();
 }
 
-void floodFill(GLint x, GLint y, Color oldColor, Color newColor) {
-	Color color;
-	color = getPixelColor(x, y);
+void bfill(GLint x, GLint y, Color boundColor, Color newColor){
 
-	if(color.r == oldColor.r && color.g == oldColor.g && color.b == oldColor.b)
-	{
-		setPixelColor(x, y, newColor);
-		floodFill(x+1, y, oldColor, newColor);
-		floodFill(x, y+1, oldColor, newColor);
-		floodFill(x-1, y, oldColor, newColor);
-		floodFill(x, y-1, oldColor, newColor);
-	}
-	return;
+    //to get the current pixel color
+    Color color = getPixelColor(x,y);
+
+    // std::cout<< color.r << " "<< boundColor.r << std::endl;
+    // std::cout<< color.g << " "<< boundColor.g << std::endl;
+    // std::cout<< color.b << " "<< boundColor.b << std::endl;
+
+    //stop filling as soon as getpixel color == boundary color
+    if(color.r != boundColor.r && color.g != boundColor.g && color.b != boundColor.b){
+        setPixelColor(x, y, newColor);
+        bfill(x+1, y, boundColor, newColor);
+        bfill(x, y+1, boundColor, newColor);
+        bfill(x-1, y, boundColor, newColor);
+        bfill(x, y-1, boundColor, newColor);
+    }
+    return;
 }
 
 void onMouseClick(int button, int state, int x, int y)
 {
 	Color newColor = {1.0f, 0.07f, 0.85f};
-	Color oldColor = {0.0f, 0.0f, 0.0f};//black of the screen
+	Color boundColor = {1.0f, 1.0f, 1.0f};//white of the boundary
 
-	floodFill(320, 240, oldColor, newColor);
-}
-
-void draw_circle(Point pC, GLfloat radius) {
-	GLfloat step = 1/radius;
-	GLfloat x, y;
-
-	for(GLfloat theta = 0; theta <= 360; theta += step) {
-		x = pC.x + (radius * cos(theta));
-		y = pC.y + (radius * sin(theta));
-		glVertex2i(x, y);
-	}
+	bfill(100, 100, boundColor, newColor);
 }
 
 void display(void) {
@@ -74,8 +69,13 @@ void display(void) {
 	GLfloat radius = 100;
 
 	glClear(GL_COLOR_BUFFER_BIT);
-	glBegin(GL_POINTS);
-		draw_circle(pt, radius);
+	glBegin(GL_LINES);
+        glVertex2i(200,406);
+        glVertex2i(20,56);
+        glVertex2i(20,56);
+        glVertex2i(300,96);
+        glVertex2i(300,96);
+        glVertex2i(200,406);
 	glEnd();
 	glFlush();
 }

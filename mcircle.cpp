@@ -1,6 +1,3 @@
-#include<iostream>
-#include<GL/glut.h>
-
 #include "setup.h"
 
 //MID POINT CIRCLE ALGORITHM

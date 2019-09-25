@@ -1,6 +1,3 @@
-#include<iostream>
-#include<GL/glut.h>
-
 #include"setup.h"
 
 //BRESENHAM CIRCLE DRAWING ALGORITHM
