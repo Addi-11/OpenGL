@@ -2,4 +2,4 @@
 *.out
 
 #ignore random files
-random*.cpp
+random*.*
