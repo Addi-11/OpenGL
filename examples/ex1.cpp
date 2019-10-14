@@ -10,8 +10,7 @@ std::vector< Vertex > verts;
 
 void fillVerts()
 {
-    // calculate vertices
-    // http://paulbourke.net/fractals/lorenz/
+    
     double h = 0.01;
     double a = 10.0;
     double b = 28.0;
