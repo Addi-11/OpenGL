@@ -1,3 +1,5 @@
+// Snowman 
+// Credits - Lighthouse3d
 #include<GL/glut.h>
 #include<math.h>
 
