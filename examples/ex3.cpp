@@ -1,16 +1,16 @@
-// C Program to illustrate 
-// OpenGL animation for revolution 
+// OpenGL animation for wireframe planetary revolution 
 
-#include<stdio.h> 
+// HONESTLY DUMB CODE
+
 #include<GL/glut.h> 
 #include<math.h> 
 
 // global declaration 
 int x, y; 
-float i, j; 
+float i, j;
 
 // Initialization function 
-void myInit (void) 
+void init (void) 
 { 
 	// Reset background color with black (since all three argument is 0.0) 
 	glClearColor(0.0, 0.0, 0.0, 1.0); 
@@ -176,8 +176,8 @@ int main (int argc, char** argv)
 	// Name to window 
 	glutCreateWindow("Revolution"); 
 
-	// Call to myInit() 
-	myInit(); 
+	// Call to init() 
+	init(); 
 	glutDisplayFunc(display); 
 	glutMainLoop(); 
 } 

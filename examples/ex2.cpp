@@ -1,3 +1,4 @@
+// Ananlog Clock
 #include <GL/glut.h>
 #include <math.h>
 
@@ -6,6 +7,7 @@ struct Point {
 	GLint y;
 };
 
+// drawing line
 void draw_dda(Point p1, Point p2) {
 	GLfloat dx = p2.x - p1.x;
 	GLfloat dy = p2.y - p1.y;
@@ -35,6 +37,7 @@ void init() {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glColor3f(0.0f, 0.0f, 0.0f);
 	glPointSize(5.0);
+    //setting axis range in both directions
 	gluOrtho2D(0.0f, 640.0f, 0.0f, 480.0f);
 }
 
@@ -76,28 +79,31 @@ void display(void) {
 	pSecond.x = pC.x + (sRadius * cos(sDegree));
 
 	glClear(GL_COLOR_BUFFER_BIT);
-	glBegin(GL_POINTS);
-	glColor3f(1.0, 0.0, 1.0);
+	glBegin(GL_TRIANGLE_FAN);
+	glColor3f(1.0, 0.84, 0.75);
 	draw_circle(pC, radius);
-	glColor3f(1.0, 0.0, 0.0);
+	glEnd();
+	glBegin(GL_POINTS);
+	glColor3f(0.25, 0.21, 0.55);
 	draw_dda(pC, pHour);
 
-	glColor3f(0.0, 1.0, 0.0);
+	glColor3f(0.34, 0.23, 0.20);
 	draw_dda(pC, pMinute);
 
-	glColor3f(0.0, 0.0, 1.0);
+	glColor3f(0.36, 0.74, 0.77);
 	draw_dda(pC, pSecond);
 	glEnd();
 	glFlush();
 
+	// changing angles for clockwise movement
 	mDegree -= 0.001333333;
 	sDegree -= 0.08;
 	hDegree -= 0.0002733333;
 
 }
 
-void Timer(int value) {
-	glutTimerFunc(33, Timer, 0);
+void timer(int value) {
+	glutTimerFunc(30, timer, 0);
 	glutPostRedisplay();
 }
 
@@ -106,10 +112,10 @@ int main(int argc, char **argv) {
 	glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);
 	glutInitWindowPosition(200, 200);
 	glutInitWindowSize(640, 480);
-	glutCreateWindow("Square");
-	glutDisplayFunc(display);
+	glutCreateWindow("Clock");
 	init();
-	Timer(0);
+	glutDisplayFunc(display);
+	timer(0);
 	glutMainLoop();
 
 	return 0;
